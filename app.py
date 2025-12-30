@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from schema import response_model
 from schema.model import UserInput
 from MLmodel.predict import predict_output, MODEL_VERSION, model
 from schema.response_model import ResponseModel
@@ -19,7 +18,7 @@ def health_check():
         'model_loaded': model is not None
     }
 
-@app.post("/predict")
+@app.post("/predict",  response_model=ResponseModel)
 def predict_premium(data: UserInput):
 
     user_input={
@@ -31,7 +30,7 @@ def predict_premium(data: UserInput):
         'occupation':data.occupation
     }
 
-    prediction = predict_output(user_input, response_model=ResponseModel)
+    prediction = predict_output(user_input)
 
     try:
         return JSONResponse(status_code=200, content={'response': prediction})

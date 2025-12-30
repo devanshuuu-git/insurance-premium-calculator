@@ -32,6 +32,14 @@ env/
 coverage.xml
 htmlcov/
 
+ # Tooling caches
+ .mypy_cache/
+ .ruff_cache/
+ .pyright/
+ .tox/
+ .nox/
+ __pypackages__/
+
 # IDEs / editors
 .vscode/
 .idea/
